@@ -95,7 +95,7 @@ client
 
 ````
 
-#### 5. The takeaway?
+### 5. The takeaway?
 
 TBH before I learned about gRPC I had no idea how awesome it is. And given the choice between the two, I would definitely prefer gRPC over REST for the reasons mentioned above.
 
