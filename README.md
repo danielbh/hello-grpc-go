@@ -14,8 +14,65 @@ So in summary you can deliver more performant code faster that is more maintaina
 
 #### But what is the downside?
 
-* One could definitively say that gRPC has limited web support
+* It looks like http/2 is supported in most recent versions of web browsers, but older versions don't support.
+* I think also there is less talent and support for gRPC, but given that it is easy to learn, I would say onramp time is probably not so bad, especially considering automatic code generation.
+* Probably better suited for backend applications although I do see web and mobile client solutions that uses it.
 
 ### 2. how is middleware handled
+
+You use functions called interceptors, they serve the niche that middleware functions have. interceptors in gRPC are used both on server and client.
+
+[Example from techschool of server interceptor](https://dev.to/techschoolguru/use-grpc-interceptor-for-authorization-with-jwt-1c5h)
+
+````go
+
+func unaryInterceptor(
+    ctx context.Context,
+    req interface{},
+    info *grpc.UnaryServerInfo,
+    handler grpc.UnaryHandler,
+) (interface{}, error) {
+    log.Println("--> unary interceptor: ", info.FullMethod)
+    return handler(ctx, req)
+}
+
+func main() {
+    ...
+    grpcServer := grpc.NewServer(
+       grpc.UnaryInterceptor(unaryInterceptor),
+    )
+    ...
+}
+
+````
+
 ### 3. How is authentication handled?
+
+You would use the same code you use for REST middlewareware with the exception being the use of gRPC interceptors to invoke those functions as opposed to REST middleware. You would have an interceptor to handle the token passing and generation, and maybe refreshing on the client side, and on the server side you would have the creation and validation interceptors.
+
 ### 4. How is tls handled?
+
+Since gRPC uses HTTP/2 under the hood it would just use the same TLS or even mTLS (mutual TLS). There are explicit APIs for defining this in server and client creation.
+
+server
+
+````go
+
+  grpcServer := grpc.NewServer(
+        grpc.Creds(tlsCredentials),
+        ....
+    )
+
+````
+
+client
+
+````go
+
+ cc2, err := grpc.Dial(
+        *serverAddress,
+        grpc.WithTransportCredentials(tlsCredentials),
+        ....
+    )
+
+````
