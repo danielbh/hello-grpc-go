@@ -1,6 +1,24 @@
 # hello-gRPC-go
 
-BigtThanks to [Tech School's FREE course on dev.to](https://dev.to/techschoolguru/series/7311) which helped me greatly to learn gRPC and answer the following questions.
+This repo includes:
+
+* An in-memory kv store server and clients that uses gRPC, interceptor, and TL
+* Summary of main features of gRPC vs REST
+
+
+## In-memory kv store server
+
+* [ ] server gRPC methods
+* [ ] client gRPC methods
+* [ ] cache with concurrency support and locking
+* [ ] interceptor client
+* [ ] interceptor server
+* [ ] TLS
+* [ ] full test coverage
+
+## Summary of gRPC
+
+Big Thanks to [Tech School's FREE course on dev.to](https://dev.to/techschoolguru/series/7311) which helped me greatly to learn gRPC and answer the following questions.
 
 ### 1. Why use gRPC instead of rest?
 
