@@ -2,7 +2,7 @@
 
 This repo includes:
 
-* An in-memory kv store server and clients that uses gRPC, interceptor, and TL
+* An in-memory kv store server and clients that uses gRPC, interceptor, and TLS
 * Summary of main features of gRPC vs REST
 
 
