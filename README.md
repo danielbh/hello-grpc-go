@@ -4,11 +4,11 @@ BigtThanks to [Tech School's FREE course on dev.to](https://dev.to/techschoolgur
 
 ### 1. Why use gRPC instead of rest?
 
-The first most important answer to this question is the usage of HTTP/2 in gRPC. REST can use HTTP/2 or the much more common HTTP/1.1. HTTP/2 has some great features over its predecessor. Which include, binary protocol instead of text-based, compressed headers, multiplexing on same TCP connection, and server-push. So I think it's a fairer comparison to not use this quality when comparing the two.
+The first most important answer to this question is the usage of HTTP/2 in gRPC. REST can use HTTP/2 or the much more common HTTP/1.1. HTTP/2 has some great features over its predecessor. Which include, binary protocol instead of text-based protocol, compressed headers, multiplexing on same TCP connection, and server-push. So I think it's a fairer comparison to not use this attribute when comparing the two.
 
 #### So HTTP/2 aside why else would I use gRPC?
 
-Polyglot auto-code generation with [protocol buffers](https://developers.google.com/protocol-buffers/docs/overview). You can create request and payload functionality in one language [protocol buffers](https://developers.google.com/protocol-buffers/docs/overview) and automatically generate code for many popular languages: Java, Ruby, etc. Not only does this reduce code needed written by a developer, it creates a universal contract that all services can share and use. Without this it can create suprising complexity as software platforms grow.
+Polyglot auto-code generation with [protocol buffers](https://developers.google.com/protocol-buffers/docs/overview). You can create request and payload functionality in one language [protocol buffers](https://developers.google.com/protocol-buffers/docs/overview) and automatically generate code for many popular languages: Java, Ruby, etc. Not only does this reduce code needed written by a developer, it creates a universal contract that all services can share and use. This is great because as platforms grow contracts can be strictly maintained between services.
 
 So in summary you can deliver more performant code faster that is more maintainable. Awesome!
 
@@ -20,7 +20,7 @@ So in summary you can deliver more performant code faster that is more maintaina
 
 ### 2. how is middleware handled
 
-You use functions called interceptors, they serve the niche that middleware functions have. interceptors in gRPC are used both on server and client.
+You use functions called interceptors, they serve the niche that middleware functions have. Interceptors in gRPC are used both on server and client.
 
 [Example from techschool of server interceptor](https://dev.to/techschoolguru/use-grpc-interceptor-for-authorization-with-jwt-1c5h)
 
@@ -48,7 +48,7 @@ func main() {
 
 ### 3. How is authentication handled?
 
-You would use the same code you use for REST middlewareware with the exception being the use of gRPC interceptors to invoke those functions as opposed to REST middleware. You would have an interceptor to handle the token passing and generation, and maybe refreshing on the client side, and on the server side you would have the creation and validation interceptors.
+You would use the same code you use with REST middleware but instead of REST middleware you would use gRPC interceptors to invoke those functions. On the client side you would have a functionality to login and interceptor(s) to handle the token passing, and maybe refreshing of token. On the server side you would have method for logging in and creation of tokens, and interceptors for the parsing and validation of the token.
 
 ### 4. How is tls handled?
 
