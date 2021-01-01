@@ -76,3 +76,10 @@ client
     )
 
 ````
+
+#### 5. The takeaway?
+
+TBH before I learned about gRPC I had no idea how awesome it is. And given the choice between the two, I would definitely prefer gRPC over REST for the reasons mentioned above.
+
+<a href="https://imgflip.com/i/4s97f5"><img src="https://i.imgflip.com/4s97f5.jpg" title="made at imgflip.com"/></a><div><a href="https://imgflip.com/memegenerator">from Imgflip Meme Generator</a></div>
+
