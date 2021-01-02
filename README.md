@@ -1,20 +1,24 @@
 # hello-gRPC-go
 
+[This repo is part of my Project52](https://github.com/danielbh/project52)
+
 This repo includes:
 
-* A single node cache server and client that uses gRPC, interceptor, and TLS
+* A single node cache server and client that uses gRPC
 * Summary of main features of gRPC vs REST
 
 
 ## single node cache with rpc API
 
-* [ ] server gRPC methods
-* [ ] client gRPC methods
-* [ ] cache with concurrency support and locking
-* [ ] interceptor client
-* [ ] interceptor server
-* [ ] TLS
-* [ ] full test coverage
+Included:
+
+* Get and Set RPC method
+* server and client created via gRPC code generation
+* client tests
+
+Further work:
+
+* Not happy with my usage of Any for get & set Value. Would like to revisit when I have time.
 
 ## Summary of gRPC
 
@@ -26,7 +30,7 @@ The first most important answer to this question is the usage of HTTP/2 in gRPC.
 
 #### So HTTP/2 aside why else would I use gRPC?
 
-Polyglot auto-code generation with [protocol buffers](https://developers.google.com/protocol-buffers/docs/overview). You can create request and payload functionality in one language [protocol buffers](https://developers.google.com/protocol-buffers/docs/overview) and automatically generate code for many popular languages: Java, Ruby, etc. Not only does this reduce code needed written by a developer, it creates a universal contract that all services can share and use. This is great because as platforms grow contracts can be strictly maintained between services.
+Polyglot auto-code generation with [protocol buffers](https://developers.google.com/protocol-buffers/docs/overview). You can create request and payload functionality in one language [protocol buffers](https://developers.google.com/protocol-buffers/docs/overview) and automatically generate CLIENT AND SERVER code for many popular languages: Java, Ruby, etc. Not only does this reduce code needed written by a developer, it creates a universal contract that all services can share and use. This is great because as platforms grow contracts can be strictly maintained between services.
 
 So in summary you can deliver more performant code faster that is more maintainable. Awesome!
 

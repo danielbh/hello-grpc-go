@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"log"
@@ -43,20 +44,9 @@ func startGRPCServer(
 	enableTLS bool,
 	listener net.Listener,
 ) error {
-	// interceptor := service.NewAuthInterceptor(jwtManager, accessibleRoles())
 	serverOptions := []grpc.ServerOption{
-		// grpc.UnaryInterceptor(interceptor.Unary()),
-		// grpc.StreamInterceptor(interceptor.Stream()),
+		grpc.UnaryInterceptor(loggerInterceptor),
 	}
-
-	// if enableTLS {
-	// 	// tlsCredentials, err := loadTLSCredentials()
-	// 	if err != nil {
-	// 		return fmt.Errorf("cannot load TLS credentials: %w", err)
-	// 	}
-
-	// 	serverOptions = append(serverOptions, grpc.Creds(tlsCredentials))
-	// }
 
 	grpcServer := grpc.NewServer(serverOptions...)
 
@@ -65,4 +55,14 @@ func startGRPCServer(
 
 	log.Printf("Start GRPC server at %s, TLS = %t", listener.Addr().String(), enableTLS)
 	return grpcServer.Serve(listener)
+}
+
+func loggerInterceptor(
+	ctx context.Context,
+	req interface{},
+	info *grpc.UnaryServerInfo,
+	handler grpc.UnaryHandler,
+) (interface{}, error) {
+	log.Println("Request: ", info.FullMethod)
+	return handler(ctx, req)
 }
